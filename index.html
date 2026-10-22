@@ -266,6 +266,25 @@
             margin-top: 6px;
         }
 
+        .preview-clauses {
+            background-color: #f8f4ef;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: #332d29;
+            border-left: 3px solid var(--primary-color);
+            margin: 14px 0;
+            line-height: 1.5;
+        }
+
+        .preview-clauses ol {
+            padding-left: 16px;
+        }
+
+        .preview-clauses li {
+            margin-bottom: 8px;
+        }
+
         .preview-signature-img {
             max-width: 200px;
             border-bottom: 1px solid #000;
@@ -381,13 +400,20 @@
             <p><strong>Email:</strong> <span id="p-email"></span></p>
             <p><strong>Teléfono:</strong> <span id="p-phone"></span></p>
             <p><strong>Domicilio:</strong> <span id="p-address"></span></p>
-            <br>
-            <div style="background-color: #f8f4ef; padding: 12px; border-radius: 6px; font-size: 0.8rem; color: #475569; border-left: 3px solid var(--primary-color);">
-                <strong>Declaración de Conformidad:</strong><br>
-                El adoptante declara haber leído, comprendido y aceptado íntegramente los 6 puntos del Compromiso de Adopción Responsable de Proyecto Patitas para la tenencia responsable del animal.
+            
+            <div class="preview-clauses">
+                <p style="margin-bottom: 8px;"><strong>Compromisos Asumidos por el Adoptante:</strong></p>
+                <ol>
+                    <li><strong>Bienestar e Integridad:</strong> Brindar alimento de calidad, agua fresca, refugio seguro (protegido del clima) y afecto. El animal será considerado un miembro de la familia y en ningún caso vivirá encadenado, en techos o en condiciones de aislamiento.</li>
+                    <li><strong>Atención Veterinaria:</strong> Mantener al día su plan de vacunación, desparasitación y atención médica ante cualquier síntoma o emergencia.</li>
+                    <li><strong>Esterilización:</strong> Si el animal no fue entregado castrado por razones de edad o salud, el/la adoptante se compromete a realizar la cirugía en la fecha pactada con Proyecto Patitas.</li>
+                    <li><strong>Identificación y Seguridad:</strong> Mantener al animal con collar y chapa identificatoria con teléfono de contacto. Las salidas a la vía pública serán siempre con correa.</li>
+                    <li><strong>Seguimiento:</strong> Permitir que Proyecto Patitas realice un seguimiento amigable (fotos, videos o visitas coordinadas) para verificar su adaptación.</li>
+                    <li><strong>No Abandono ni Cesión:</strong> En caso de no poder continuar con la tenencia por motivos de fuerza mayor, se prohíbe regalar, vender o abandonar al animal. El adoptante informará de inmediato a Proyecto Patitas para coordinar su reubicación conjunta.</li>
+                </ol>
             </div>
-            <br>
-            <p><strong>Firma del Adoptante:</strong></p>
+
+            <p><strong>Firma de Conformidad del Adoptante:</strong></p>
             <img id="p-signature" class="preview-signature-img" alt="Firma del adoptante">
         </div>
 
@@ -476,25 +502,4 @@
         // Cargar datos en la vista previa
         document.getElementById('p-petname').innerText = document.getElementById('petname').value;
         document.getElementById('p-name').innerText = document.getElementById('fullname').value;
-        document.getElementById('p-dni').innerText = document.getElementById('dni').value;
-        document.getElementById('p-email').innerText = document.getElementById('email').value;
-        document.getElementById('p-phone').innerText = document.getElementById('phone').value;
-        document.getElementById('p-address').innerText = document.getElementById('address').value;
-        
-        const today = new Date().toLocaleDateString('es-AR', {
-            year: 'numeric', month: 'long', day: 'numeric'
-        });
-        document.getElementById('p-date').innerText = today;
-
-        // Convertir firma a imagen DataURL
-        const signatureDataURL = canvas.toDataURL('image/png');
-        document.getElementById('p-signature').src = signatureDataURL;
-
-        // Mostrar sección de vista previa
-        document.getElementById('preview-section').style.display = 'block';
-        document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
-    });
-</script>
-
-</body>
-</html>
+        document.getElementById('p-dni').innerText
