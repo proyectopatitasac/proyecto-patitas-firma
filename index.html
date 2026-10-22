@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Firma de Contrato Digital</title>
+    <title>Compromiso de Adopción Responsable - Proyecto Patitas</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg-color: #f8fafc;
+            --primary-color: #a06e42;
+            --primary-hover: #83562f;
+            --bg-color: #faf7f2;
             --card-bg: #ffffff;
-            --text-color: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --accent-color: #10b981;
+            --text-color: #2c221e;
+            --text-muted: #736357;
+            --border-color: #e8ded5;
+            --accent-color: #2e7d32;
         }
 
         * {
@@ -38,7 +38,7 @@
             max-width: 650px;
             background: var(--card-bg);
             border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(160, 110, 66, 0.08);
             padding: 24px;
             margin-bottom: 40px;
         }
@@ -47,22 +47,32 @@
             text-align: center;
             margin-bottom: 24px;
             border-bottom: 2px solid var(--border-color);
-            padding-bottom: 16px;
+            padding-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            margin-bottom: 10px;
         }
 
         .header h1 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--primary-color);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .header p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
+            font-weight: 500;
         }
 
         .section-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 12px;
             color: var(--text-color);
@@ -108,7 +118,7 @@
             font-size: 1rem;
             outline: none;
             transition: border-color 0.2s;
-            background-color: #fafafa;
+            background-color: #fdfbf7;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -133,12 +143,24 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 16px;
-            max-height: 200px;
+            max-height: 260px;
             overflow-y: auto;
-            background-color: #f1f5f9;
+            background-color: #f8f4ef;
             font-size: 0.85rem;
             margin-bottom: 16px;
             line-height: 1.6;
+        }
+
+        .contract-box p {
+            margin-bottom: 10px;
+        }
+
+        .contract-box ol {
+            padding-left: 18px;
+        }
+
+        .contract-box li {
+            margin-bottom: 10px;
         }
 
         .checkbox-group {
@@ -209,7 +231,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 4px 12px rgba(160, 110, 66, 0.25);
         }
 
         .btn-submit:hover {
@@ -229,13 +251,19 @@
             padding: 20px;
             border-radius: 8px;
             background: #fff;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 16px;
         }
 
         .preview-card h3 {
-            text-align: center;
-            margin-bottom: 16px;
             color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-top: 6px;
         }
 
         .preview-signature-img {
@@ -262,16 +290,22 @@
 
 <div class="container">
     <div class="header">
-        <h1>Firma de Contrato Digital</h1>
-        <p>Completa tus datos y firma directamente desde tu pantalla táctil.</p>
+        <img src="logo.png" alt="Logo Proyecto Patitas" class="logo-img" onerror="this.style.display='none'">
+        <h1>PROYECTO PATITAS</h1>
+        <p>Compromiso de Adopción Responsable</p>
     </div>
 
     <form id="contract-form" class="no-print">
-        <!-- Paso 1: Datos del Firmante -->
-        <div class="section-title"><span>1</span> Datos Personales</div>
+        <!-- Paso 1: Datos de la Adopción -->
+        <div class="section-title"><span>1</span> Datos de la Adopción</div>
         
         <div class="form-group">
-            <label for="fullname">Nombre Completo *</label>
+            <label for="petname">Nombre del Animal Adoptado *</label>
+            <input type="text" id="petname" required placeholder="Ej: Lobito, Lola, Rocco...">
+        </div>
+
+        <div class="form-group">
+            <label for="fullname">Nombre Completo del Adoptante *</label>
             <input type="text" id="fullname" required placeholder="Ej: Juan Pérez">
         </div>
 
@@ -293,23 +327,27 @@
 
         <div class="form-group">
             <label for="address">Domicilio *</label>
-            <input type="text" id="address" required placeholder="Calle, Número, Ciudad">
+            <input type="text" id="address" required placeholder="Calle, Número, Localidad">
         </div>
 
         <!-- Paso 2: Términos y Contrato -->
-        <div class="section-title"><span>2</span> Cláusulas del Contrato</div>
+        <div class="section-title"><span>2</span> Compromiso de Adopción Responsable</div>
         
         <div class="contract-box" id="contract-text">
-            <p><strong>CONTRATO DE COMPROMISO Y ADOPCIÓN / SERVICIO</strong></p><br>
-            <p>Por el presente documento, el firmante declara asumir la responsabilidad legal sobre el cumplimiento de los términos acordados, garantizando la veracidad de la información proporcionada.</p><br>
-            <p><strong>Primera:</strong> El firmante se compromete a mantener comunicación fluida y brindar las condiciones adecuadas según lo estipulado.</p><br>
-            <p><strong>Segunda:</strong> La firma efectuada en la presente plataforma digital tendrá validez legal y de conformidad plena respecto de las condiciones del acuerdo.</p><br>
-            <p><strong>Tercera:</strong> Ambas partes expresan su conformidad sin ninguna reserva ni coacción alguna.</p>
+            <p>Al firmar este contrato, la persona adoptante se compromete voluntariamente a:</p>
+            <ol>
+                <li><strong>Bienestar e Integridad:</strong> Brindar alimento de calidad, agua fresca, refugio seguro (protegido del clima) y afecto. El animal será considerado un miembro de la familia y en ningún caso vivirá encadenado, en techos o en condiciones de aislamiento.</li>
+                <li><strong>Atención Veterinaria:</strong> Mantener al día su plan de vacunación, desparasitación y atención médica ante cualquier síntoma o emergencia.</li>
+                <li><strong>Esterilización:</strong> Si el animal no fue entregado castrado por razones de edad o salud, el/la adoptante se compromete a realizar la cirugía en la fecha pactada con Proyecto Patitas.</li>
+                <li><strong>Identificación y Seguridad:</strong> Mantener al animal con collar y chapa identificatoria con teléfono de contacto. Las salidas a la vía pública serán siempre con correa.</li>
+                <li><strong>Seguimiento:</strong> Permitir que Proyecto Patitas realice un seguimiento amigable (fotos, videos o visitas coordinadas) para verificar su adaptación.</li>
+                <li><strong>No Abandono ni Cesión:</strong> En caso de no poder continuar con la tenencia por motivos de fuerza mayor, se prohíbe regalar, vender o abandonar al animal. El adoptante informará de inmediato a Proyecto Patitas para coordinar su reubicación conjunta.</li>
+            </ol>
         </div>
 
         <div class="checkbox-group">
             <input type="checkbox" id="terms" required>
-            <label for="terms">He leído y acepto expresamente todas las cláusulas y condiciones estipuladas en el contrato anterior.</label>
+            <label for="terms">He leído y me comprometo voluntariamente a cumplir con todos los puntos del Compromiso de Adopción Responsable.</label>
         </div>
 
         <!-- Paso 3: Firma Táctil -->
@@ -330,23 +368,27 @@
     <!-- Vista previa y descarga de contrato firmado -->
     <div id="preview-section">
         <div class="preview-card">
-            <h3>DOCUMENTO CONFIRMADO Y FIRMADO</h3>
-            <p><strong>Fecha:</strong> <span id="p-date"></span></p>
-            <p><strong>Firmante:</strong> <span id="p-name"></span></p>
+            <div class="preview-header">
+                <img src="logo.png" alt="Logo Proyecto Patitas" style="width: 80px; height: 80px; object-fit: contain;">
+                <h3>PROYECTO PATITAS</h3>
+                <p style="font-size: 0.85rem; color: #666;">COMPROMISO DE ADOPCIÓN RESPONSABLE</p>
+            </div>
+            <p><strong>Fecha de Firma:</strong> <span id="p-date"></span></p>
+            <p><strong>Animal Adoptado:</strong> <span id="p-petname" style="font-weight: bold; color: var(--primary-color);"></span></p>
+            <hr style="margin: 10px 0; border: none; border-top: 1px dashed var(--border-color);">
+            <p><strong>Adoptante:</strong> <span id="p-name"></span></p>
             <p><strong>DNI/ID:</strong> <span id="p-dni"></span></p>
             <p><strong>Email:</strong> <span id="p-email"></span></p>
             <p><strong>Teléfono:</strong> <span id="p-phone"></span></p>
             <p><strong>Domicilio:</strong> <span id="p-address"></span></p>
             <br>
-            <hr>
+            <div style="background-color: #f8f4ef; padding: 12px; border-radius: 6px; font-size: 0.8rem; color: #475569; border-left: 3px solid var(--primary-color);">
+                <strong>Declaración de Conformidad:</strong><br>
+                El adoptante declara haber leído, comprendido y aceptado íntegramente los 6 puntos del Compromiso de Adopción Responsable de Proyecto Patitas para la tenencia responsable del animal.
+            </div>
             <br>
-            <p><strong>Conformidad del Contrato:</strong></p>
-            <p style="font-size: 0.85rem; color: #555; margin-top: 6px;">
-                El firmante acepta de manera expresa y formal la totalidad de las cláusulas detalladas en el acuerdo presentado.
-            </p>
-            <br>
-            <p><strong>Firma registrada:</strong></p>
-            <img id="p-signature" class="preview-signature-img" alt="Firma del adoptante/usuario">
+            <p><strong>Firma del Adoptante:</strong></p>
+            <img id="p-signature" class="preview-signature-img" alt="Firma del adoptante">
         </div>
 
         <button class="btn-submit btn-print no-print" onclick="window.print()">Guardar o Imprimir en PDF</button>
@@ -366,7 +408,7 @@
         canvas.width = canvas.offsetWidth * ratio;
         canvas.height = canvas.offsetHeight * ratio;
         ctx.scale(ratio, ratio);
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = '#2c221e';
         ctx.lineWidth = 2.5;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
@@ -432,6 +474,7 @@
         }
 
         // Cargar datos en la vista previa
+        document.getElementById('p-petname').innerText = document.getElementById('petname').value;
         document.getElementById('p-name').innerText = document.getElementById('fullname').value;
         document.getElementById('p-dni').innerText = document.getElementById('dni').value;
         document.getElementById('p-email').innerText = document.getElementById('email').value;
