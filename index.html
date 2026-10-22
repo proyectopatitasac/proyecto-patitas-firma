@@ -138,7 +138,6 @@
             }
         }
 
-        /* Contrato Scrollable */
         .contract-box {
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -182,7 +181,6 @@
             font-weight: normal;
         }
 
-        /* Área de Firma */
         .signature-container {
             border: 2px dashed var(--primary-color);
             border-radius: 8px;
@@ -219,7 +217,6 @@
             color: var(--primary-color);
         }
 
-        /* Botones Acción */
         .btn-submit {
             width: 100%;
             background-color: var(--primary-color);
@@ -238,7 +235,6 @@
             background-color: var(--primary-hover);
         }
 
-        /* Vista previa PDF / Documento generado */
         #preview-section {
             display: none;
             margin-top: 20px;
@@ -315,7 +311,6 @@
     </div>
 
     <form id="contract-form" class="no-print">
-        <!-- Paso 1: Datos de la Adopción -->
         <div class="section-title"><span>1</span> Datos de la Adopción</div>
         
         <div class="form-group">
@@ -349,7 +344,6 @@
             <input type="text" id="address" required placeholder="Calle, Número, Localidad">
         </div>
 
-        <!-- Paso 2: Términos y Contrato -->
         <div class="section-title"><span>2</span> Compromiso de Adopción Responsable</div>
         
         <div class="contract-box" id="contract-text">
@@ -369,7 +363,6 @@
             <label for="terms">He leído y me comprometo voluntariamente a cumplir con todos los puntos del Compromiso de Adopción Responsable.</label>
         </div>
 
-        <!-- Paso 3: Firma Táctil -->
         <div class="section-title"><span>3</span> Firma Digital Táctil</div>
         <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Dibuja tu firma con el dedo o stylus dentro del recuadro:</p>
 
@@ -384,7 +377,6 @@
         <button type="submit" class="btn-submit">Generar Contrato Firmado</button>
     </form>
 
-    <!-- Vista previa y descarga de contrato firmado -->
     <div id="preview-section">
         <div class="preview-card">
             <div class="preview-header">
@@ -422,13 +414,11 @@
 </div>
 
 <script>
-    // Inicialización de Canvas para Firma Táctil
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
     let hasSigned = false;
 
-    // Ajustar resolución del Canvas según pantalla
     function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
         canvas.width = canvas.offsetWidth * ratio;
@@ -443,7 +433,6 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Eventos Mouse y Touch
     function getPos(e) {
         const rect = canvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -475,7 +464,6 @@
         isDrawing = false;
     }
 
-    // Event Listeners para Canvas
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
@@ -484,13 +472,11 @@
     canvas.addEventListener('touchmove', draw, { passive: false });
     canvas.addEventListener('touchend', stopDrawing);
 
-    // Botón Limpiar Firma
     document.getElementById('clear-btn').addEventListener('click', () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         hasSigned = false;
     });
 
-    // Envío del Formulario
     document.getElementById('contract-form').addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -499,7 +485,25 @@
             return;
         }
 
-        // Cargar datos en la vista previa
         document.getElementById('p-petname').innerText = document.getElementById('petname').value;
         document.getElementById('p-name').innerText = document.getElementById('fullname').value;
-        document.getElementById('p-dni').innerText
+        document.getElementById('p-dni').innerText = document.getElementById('dni').value;
+        document.getElementById('p-email').innerText = document.getElementById('email').value;
+        document.getElementById('p-phone').innerText = document.getElementById('phone').value;
+        document.getElementById('p-address').innerText = document.getElementById('address').value;
+        
+        const today = new Date().toLocaleDateString('es-AR', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+        document.getElementById('p-date').innerText = today;
+
+        const signatureDataURL = canvas.toDataURL('image/png');
+        document.getElementById('p-signature').src = signatureDataURL;
+
+        document.getElementById('preview-section').style.display = 'block';
+        document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
