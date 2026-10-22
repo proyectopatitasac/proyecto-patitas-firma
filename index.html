@@ -310,7 +310,7 @@
         <p>Compromiso de Adopción Responsable</p>
     </div>
 
-    https://script.google.com/macros/s/AKfycbzGDCNUiBPAXR0qxKYmBhmvP3P7aWfyDfcTfsMEZE2KBeVaHSJ4OkuuXyvKtGW9zV22/exec
+    <form id="contract-form" class="no-print">
         <div class="section-title"><span>1</span> Datos de la Adopción</div>
         
         <div class="form-group">
@@ -374,7 +374,7 @@
             <button type="button" class="btn-small" id="clear-btn">Limpiar / Volver a firmar</button>
         </div>
 
-        <button type="submit" class="btn-submit">Generar Contrato Firmado</button>
+        <button type="submit" class="btn-submit" id="submit-btn">Generar Contrato Firmado</button>
     </form>
 
     <div id="preview-section">
@@ -414,6 +414,9 @@
 </div>
 
 <script>
+    // URL DE CONEXIÓN CON GOOGLE SHEETS
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzGDCNUiBPAXR0qxKYmBhmvP3P7aWfyDfcTfsMEZE2KBeVaHSJ4OkuuXyvKtGW9zV22/exec';
+
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
@@ -485,23 +488,63 @@
             return;
         }
 
-        document.getElementById('p-petname').innerText = document.getElementById('petname').value;
-        document.getElementById('p-name').innerText = document.getElementById('fullname').value;
-        document.getElementById('p-dni').innerText = document.getElementById('dni').value;
-        document.getElementById('p-email').innerText = document.getElementById('email').value;
-        document.getElementById('p-phone').innerText = document.getElementById('phone').value;
-        document.getElementById('p-address').innerText = document.getElementById('address').value;
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Guardando contrato...";
+
+        const petName = document.getElementById('petname').value;
+        const fullName = document.getElementById('fullname').value;
+        const dni = document.getElementById('dni').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
         
         const today = new Date().toLocaleDateString('es-AR', {
             year: 'numeric', month: 'long', day: 'numeric'
         });
-        document.getElementById('p-date').innerText = today;
 
         const signatureDataURL = canvas.toDataURL('image/png');
-        document.getElementById('p-signature').src = signatureDataURL;
 
-        document.getElementById('preview-section').style.display = 'block';
-        document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
+        if (SCRIPT_URL) {
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    fecha: today,
+                    mascota: petName,
+                    nombre: fullName,
+                    dni: dni,
+                    telefono: phone,
+                    email: email,
+                    domicilio: address,
+                    firma: signatureDataURL
+                })
+            }).then(() => {
+                showPreview();
+            }).catch(error => {
+                console.error("Error al guardar:", error);
+                showPreview();
+            });
+        } else {
+            showPreview();
+        }
+
+        function showPreview() {
+            document.getElementById('p-petname').innerText = petName;
+            document.getElementById('p-name').innerText = fullName;
+            document.getElementById('p-dni').innerText = dni;
+            document.getElementById('p-email').innerText = email;
+            document.getElementById('p-phone').innerText = phone;
+            document.getElementById('p-address').innerText = address;
+            document.getElementById('p-date').innerText = today;
+            document.getElementById('p-signature').src = signatureDataURL;
+
+            document.getElementById('preview-section').style.display = 'block';
+            document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Generar Contrato Firmado";
+        }
     });
 </script>
 
